@@ -1,119 +1,90 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- */
+'use strict';
 
-import React, {
+var React = require('react-native');
+var {
   AppRegistry,
-  Component,
   StyleSheet,
-  Text,
-  TextInput,
   TouchableHighlight,
-  Vibration,
+  Text,
   View,
-  WebView
-} from 'react-native';
+  WebView,
+} = React;
 
-class TuringApplication extends Component {
-  constructor() {
-    super();
-    this.state = {
-      title: 'Wowowowwow',
-      currentTime: '12:00 PM',
-    };
-  }
+var TuringApplication = React.createClass({
+  getInitialState: function() {
+    return {activeButton: 'today'}
+  },
 
-  componentDidMount() {
-    this.updateTime();
-    setInterval(this.updateTime.bind(this), 1000);
-  }
+  handlePress: function(button) {
+    this.setState({activeButton: button})
+  },
 
-  handleButtonPress() {
-    Vibration.vibrate();
-    alert(`Here is the title ${this.state.title}`);
-  }
+  render: function() {
+    var buttonValues = [{arg: 'today', text: 'Today'}, {arg: 'mod1', text: 'Module 1'}, {arg: 'mod2', text: 'Module 2'}, {arg: 'mod3', text: 'Module 3'}, {arg: 'mod4', text: 'Module 4'}]
+    var navButtons = buttonValues.map(function(obj, i){
+      return (
+        <TouchableHighlight
+          style={styles.button}
+          onPress={this.handlePress.bind(null, obj.arg)}
+          key={i}
+        >
+          <Text style={styles.buttonText}>{obj.text}</Text>
+        </TouchableHighlight>
+      )
+    }.bind(this));
 
-  handleTitleChange(text) {
-    this.setState({ title: text });
-  }
+    var view;
 
-  updateTime() {
-    this.setState({ currentTime: (new Date().toString()) });
-  }
+    switch (this.state.activeButton) {
+      // case 'today':
+      // view = <WebView source={{uri:"http://today.turing.io"}}/>
+      //   break;
+      case 'mod1':
+      view = <Text>This is the mod1 view</Text>
+        break;
+      case 'mod2':
+      view = <Text>This is the mod2 view</Text>
+        break;
+      case 'mod3':
+      view = <Text>This is the mod3 view</Text>
+        break;
+      case 'mod4':
+      view = <Text>This is the mod4 view</Text>
+        break;
+    }
 
-  onNavigationStateChange(navState) {
-    this.setState({
-      backButtonEnabled: navState.canGoBack,
-      forwardButtonEnabled: navState.canGoForward,
-      url: navState.url,
-      status: navState.title,
-      loading: navState.loading,
-      scalesPageToFit: true
-    });
-  }
-
-  render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          {this.state.title}
-        </Text>
-        <Text>
-          The time is {this.state.currentTime}.
-        </Text>
-        <TouchableHighlight style={styles.button} onPress={this.handleButtonPress.bind(this)}>
-          <Text style={styles.buttonText}>I should just be called button!</Text>
-        </TouchableHighlight>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={this.handleTitleChange.bind(this)}
-          value={this.state.title}
-        />
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-        <View>
-          <WebView html="<h1>Hello world!</h1>"/>
-        </View>
+
+        {navButtons}
+
+        {view}
+
       </View>
     );
   }
-}
+});
 
-const styles = StyleSheet.create({
+var styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  webView: {
-    backgroundColor: '#F00',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  button: {
-    marginBottom: 7,
-    borderWidth: 2,
-    borderRadius: 10,
+    backgroundColor: 'white',
   },
   buttonText: {
-    margin: 5,
+    fontSize: 18,
+    color: 'white',
+    alignSelf: 'center',
   },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
+  button: {
+    flexDirection: 'row',
+    backgroundColor: '#48BBEC',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
   },
 });
 
 AppRegistry.registerComponent('TuringApplication', () => TuringApplication);
+
+module.exports = TuringApplication;
