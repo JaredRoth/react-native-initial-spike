@@ -10,6 +10,12 @@ var {
   WebView,
 } = React;
 
+var ModuleView = React.createClass({
+  render: function() {
+      return(<Text>We have reached the module {this.props.module} view.</Text>)
+  }
+})
+
 var TuringApplication = React.createClass({
   getInitialState: function() {
     return {activeButton: 'today'}
@@ -36,20 +42,20 @@ var TuringApplication = React.createClass({
     var view;
 
     switch (this.state.activeButton) {
-      // case 'today':
-      // view = <WebView source={{uri:"http://today.turing.io"}}/>
-      //   break;
+      case 'today':
+      view = <WebView source={{uri:"http://today.turing.io"}}/>
+        break;
       case 'mod1':
-      view = <Text>This is the mod1 view</Text>
+      view = <ModuleView module="1"/>
         break;
       case 'mod2':
-      view = <Text>This is the mod2 view</Text>
+      view = <ModuleView module="2"/>
         break;
       case 'mod3':
-      view = <Text>This is the mod3 view</Text>
+      view = <ModuleView module="3"/>
         break;
       case 'mod4':
-      view = <Text>This is the mod4 view</Text>
+      view = <ModuleView module="4"/>
         break;
     }
 
@@ -68,8 +74,7 @@ var TuringApplication = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'column',
     backgroundColor: 'white',
   },
   buttonText: {
