@@ -20,7 +20,7 @@ var TuringApplication = React.createClass({
   },
 
   render: function() {
-    var buttonValues = [{arg: 'today', text: 'Today'}, {arg: 'mod1', text: 'Module 1'}, {arg: 'mod2', text: 'Module 2'}, {arg: 'mod3', text: 'Module 3'}, {arg: 'mod4', text: 'Module 4'}]
+    var buttonValues = [{arg: 'today', text: 'Today'}, {arg: 'mod1', text: 'Mod 1'}, {arg: 'mod2', text: 'Mod 2'}, {arg: 'mod3', text: 'Mod 3'}, {arg: 'mod4', text: 'Mod 4'}]
     var navButtons = buttonValues.map(function(obj, i){
       return (
         <TouchableHighlight
@@ -36,9 +36,9 @@ var TuringApplication = React.createClass({
     var view;
 
     switch (this.state.activeButton) {
-      // case 'today':
-      // view = <WebView source={{uri:"http://today.turing.io"}}/>
-      //   break;
+      case 'today':
+      view = <WebView source={{uri:"http://today.turing.io"}}/>
+        break;
       case 'mod1':
       view = <Text>This is the mod1 view</Text>
         break;
@@ -56,7 +56,7 @@ var TuringApplication = React.createClass({
     return (
       <View style={styles.container}>
 
-        {navButtons}
+        <View style={styles.nav}>{navButtons}</View>
 
         {view}
 
@@ -68,20 +68,24 @@ var TuringApplication = React.createClass({
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    flexDirection: 'column',
     backgroundColor: 'white',
+  },
+  button: {
+    flex: 1,
+    marginHorizontal: 1,
+    backgroundColor: '#48BBEC',
   },
   buttonText: {
     fontSize: 18,
     color: 'white',
     alignSelf: 'center',
   },
-  button: {
+  nav: {
+    marginTop: 20,
+    marginBottom: 2,
     flexDirection: 'row',
-    backgroundColor: '#48BBEC',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
