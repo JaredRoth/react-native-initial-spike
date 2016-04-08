@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+
 var {
   AppRegistry,
   StyleSheet,
@@ -12,7 +13,14 @@ var {
 
 var ModuleView = React.createClass({
   render: function() {
-      return(<Text>We have reached the module {this.props.module} view.</Text>)
+    // let html = scraperjs.StaticScraper.create('http://today.turing.io/outlines/2016-04-08/')
+    //     .scrape(function($) {
+    //         return $("{this.props.section}").nextUntil("{this.props.nextSection}").map(function() {
+    //           return $(this).html();
+    //         });
+    //     })
+    let html = "let's try this"
+    return(<Text>{html}</Text>)
   }
 })
 
@@ -46,16 +54,16 @@ var TuringApplication = React.createClass({
       view = <WebView source={{uri:"http://today.turing.io"}}/>
         break;
       case 'mod1':
-      view = <ModuleView module="1"/>
+      view = <ModuleView section="#section" nextSection="#section-1"/>
         break;
       case 'mod2':
-      view = <ModuleView module="2"/>
+      view = <ModuleView section="#section-1" nextSection="#section-2"/>
         break;
       case 'mod3':
-      view = <ModuleView module="3"/>
+      view = <ModuleView section="#section-2" nextSection="#section-3"/>
         break;
       case 'mod4':
-      view = <ModuleView module="4"/>
+      view = <ModuleView section="#section-3" nextSection=".mod-footer"/>
         break;
     }
 
