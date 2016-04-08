@@ -1,5 +1,6 @@
 'use strict';
 
+// var scraperjs = require('scraperjs');
 var React = require('react-native');
 
 var {
@@ -13,7 +14,7 @@ var {
 
 var ModuleView = React.createClass({
   render: function() {
-    // let html = scraperjs.StaticScraper.create('http://today.turing.io/outlines/2016-04-08/')
+    // let scraper = scraperjs.StaticScraper.create('http://today.turing.io/outlines/2016-04-08/')
     //     .scrape(function($) {
     //         return $("{this.props.section}").nextUntil("{this.props.nextSection}").map(function() {
     //           return $(this).html();
