@@ -48,14 +48,17 @@ var TuringApplication = React.createClass({
       )
     }.bind(this));
 
+
+    var time = Date.now();
+
     var view;
 
     switch (this.state.activeButton) {
       case 'today':
-      view = <WebView source={{uri:"http://today.turing.io"}}/>
+      view = <WebView source={{uri:"http://today.turing.io/"}}/>
         break;
       case 'mod1':
-      view = <ModuleView section="#section" nextSection="#section-1"/>
+      view = <WebView source={{uri:"http://today.turing.io/outlines/"+ time +"#section"}}/>
         break;
       case 'mod2':
       view = <ModuleView section="#section-1" nextSection="#section-2"/>
